@@ -48,8 +48,15 @@ public class EvaluationService {
 		 * Value"
 		 */
 		public static String printConversion(double kilometersPerHour) {
-			// TODO Write an implementation for this method declaration
-			return null;
+			// check if params is less than 0, if so return "Invalid Value"
+			if (kilometersPerHour < 0)
+				return "Invalid Value";
+			
+			//find mph
+			long mph = toMilesPerHour(kilometersPerHour);
+			
+			//return the correct string
+			return kilometersPerHour + " km/h = " + mph + " mi/h";
 		}
 	}
 
@@ -73,9 +80,19 @@ public class EvaluationService {
 	 * If the parameter kiloBytes is less than 0 then print the text "Invalid
 	 * Value".
 	 */
-	public String printMegaBytesAndKiloBytes(int XX) {
-		// TODO Write an implementation for this method declaration
-		return null;
+	public String printMegaBytesAndKiloBytes(int kiloBytes) {
+		// If the parameter kiloBytes is less than 0 then print the text "Invalid Value"
+		if (kiloBytes < 0)
+			return "Invalid Value";
+		
+		//calculate megabytes
+		int megabytes = Math.floorDiv(kiloBytes, 1024);
+		
+		//calculate remaining kilobytes
+		int remainder = kiloBytes % 1024;
+		
+		// return the correct string
+		return kiloBytes + " KB = " + megabytes + " MB and " + remainder + " KB";
 	}
 
 	/**
@@ -98,7 +115,15 @@ public class EvaluationService {
 	 * If the hourOfDay parameter is less than 0 or greater than 23, return false.
 	 */
 	public boolean shouldWakeUp(boolean isBarking, int hourOfDay) {
-		// TODO Write an implementation for this method declaration
+		// If isBarking is false return false
+		if (!isBarking)
+			return false;
+		
+		// If the hourOfDay parameter is between 0 and 8 or 22 and 24 return true
+		if ((hourOfDay < 8 && hourOfDay > 0) || (hourOfDay > 22 && hourOfDay < 24))
+			return true;
+		
+		// else return false
 		return false;
 	}
 
@@ -131,7 +156,8 @@ public class EvaluationService {
 	static class TeenNumberChecker {
 
 		public static boolean hasTeen(int x, int y, int z) {
-			// TODO Write an implementation for this method declaration
+			if (isTeen(x) || isTeen(y) || isTeen(z))
+				return true;
 			return false;
 		}
 
@@ -139,7 +165,9 @@ public class EvaluationService {
 		// Then pass the parameter to hasTeen method
 
 		public static boolean isTeen(int number) {
-			// TODO Write an implementation for this method declaration
+			// check if number is a teen
+			if (number >=13 && number <= 19)
+				return true;
 			return false;
 		}
 	}
@@ -160,8 +188,17 @@ public class EvaluationService {
 	 * ZZ represents the calculated days.
 	 */
 	public String printYearsAndDays(long minutes) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		// If the parameter is less than 0, print text "Invalid Value"
+		if (minutes < 0)
+			return "Invalid Value";
+					
+		// calculate number of years
+		long years = Math.floorDiv(minutes, 525600);
+		
+		// calculate remainder of days
+		long days = Math.floorDiv((minutes % 525600), 1440);
+		// return the correct string
+		return minutes + " min = " + years + " y and " + days + " d";
 	}
 
 	/**
@@ -174,8 +211,11 @@ public class EvaluationService {
 	 * statement or switch statement whatever is easier for you.
 	 */
 	public String printNumberInWord(int number) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		String[] words = {"ZERO", "ONE", "TWO", "THREE", "FOUR", "FIVE", "SIX", "SEVEN", "EIGHT", "NINE"};
+		if (number <= words.length) {
+			return words[number];
+		}
+		return "OTHER";
 	}
 
 	/**
