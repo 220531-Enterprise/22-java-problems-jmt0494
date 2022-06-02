@@ -163,6 +163,7 @@ public class EvaluationServiceTest {
 	
 	/*******************************************************************
 	 * Question 8
+	 ******************************************************************/
 	@Test
 	public void testGreatestCommonDivisor1() {
 		assertEquals(5, evaluationService.getGreatestCommonDivisor(25, 15));
@@ -177,7 +178,6 @@ public class EvaluationServiceTest {
 	public void testGreatestCommonDivisor3() {
 		assertEquals(-1, evaluationService.getGreatestCommonDivisor(9, 18));
 	}
-	 ******************************************************************/
 	
 	/*******************************************************************
 	 * Question 9
@@ -263,6 +263,7 @@ public class EvaluationServiceTest {
 
 	/*******************************************************************
 	 * Question 12
+	 ******************************************************************/
 
 	@Test
 	public void trianglesWithNoEqualSidesAreNotEquilateral() {
@@ -299,7 +300,6 @@ public class EvaluationServiceTest {
 		EvaluationService.Triangle triangle = new EvaluationService.Triangle(0.5, 0.4, 0.6);
 		assertTrue(triangle.isScalene());
 	}
-	 ******************************************************************/
 
 	/*******************************************************************
 	 * Question 13

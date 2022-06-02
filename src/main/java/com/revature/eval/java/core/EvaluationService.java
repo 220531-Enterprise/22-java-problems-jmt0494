@@ -238,8 +238,16 @@ public class EvaluationService {
 	 * and there is no resulting remainder.
 	 */
 	public int getGreatestCommonDivisor(int first, int second) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+		// if less than 10 return -1
+		if (first < 10 || second < 10)
+			return -1;
+		//find divisors
+		for (int i = Math.max(second, first); i > 0; i--) {
+			System.out.println(i);
+			if (first % i == 0 && second % i == 0)
+				return i;
+		}
+		return -1;
 	}
 
 	/**
@@ -256,7 +264,10 @@ public class EvaluationService {
 	 * invalid value.
 	 */
 	public int sumFirstAndLastDigit(int num) {
-		// TODO Write an implementation for this method declaration
+		//If the number is negative then the method needs to return -1 to indicate an invalid value.
+		if (num < 0)
+			return -1;
+		
 		return 0;
 	}
 
@@ -335,17 +346,20 @@ public class EvaluationService {
 		}
 
 		public boolean isEquilateral() {
-			// TODO Write an implementation for this method declaration
+			if (sideOne == sideTwo && sideTwo == sideThree)
+				return true;
 			return false;
 		}
 
 		public boolean isIsosceles() {
-			// TODO Write an implementation for this method declaration
+			if (sideOne == sideTwo || sideTwo == sideThree || sideOne == sideThree)
+				return true;
 			return false;
 		}
 
 		public boolean isScalene() {
-			// TODO Write an implementation for this method declaration
+			if (sideOne != sideTwo && sideTwo != sideThree && sideOne != sideThree)
+				return true;
 			return false;
 		}
 
