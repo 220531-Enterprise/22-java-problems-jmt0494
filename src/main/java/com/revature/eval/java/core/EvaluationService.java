@@ -1,7 +1,19 @@
+// complete 1-9, 12
+
 package com.revature.eval.java.core;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class EvaluationService {
 
@@ -139,9 +151,16 @@ public class EvaluationService {
 	 * Otherwise, return false;
 	 */
 	public boolean areEqualByThreeDecimalPlaces(double firstNum, double secondNum) {
-		// TODO Write an implementation for this method declaration
-		return false;
+		if (firstNum < 0 && secondNum < 0) {
+			firstNum = firstNum * -1;
+			secondNum = secondNum * -1;
+		}
+		
+		double firstRound = Math.floor(secondNum * 1000);
+		double secondRound = Math.floor(firstNum * 1000);
+		return (firstRound == secondRound);
 	}
+	
 
 	/**
 	 * 5. Teen Number Checker
@@ -243,7 +262,6 @@ public class EvaluationService {
 			return -1;
 		//find divisors
 		for (int i = Math.max(second, first); i > 0; i--) {
-			System.out.println(i);
 			if (first % i == 0 && second % i == 0)
 				return i;
 		}
@@ -268,7 +286,14 @@ public class EvaluationService {
 		if (num < 0)
 			return -1;
 		
-		return 0;
+		//convert int to String
+		String[] str = String.valueOf(num).split("");
+		//save first and last char value as int variables
+		int first = Integer.parseInt(str[0]);
+		int last = Integer.parseInt(str[str.length -1]);
+		//sum and return both variables
+		
+		return first + last;
 	}
 
 	/**
@@ -278,8 +303,12 @@ public class EvaluationService {
 	 * reverses a String. Example: reverse("example"); -> "elpmaxe"
 	 */
 	public String reverse(String string) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		char[] chars = string.toCharArray();
+		String reverseStr = "";
+		for (int i=chars.length-1 ; i >= 0; i--) {
+			reverseStr += chars[i];
+		}
+		return reverseStr;
 	}
 
 	/**
@@ -290,8 +319,12 @@ public class EvaluationService {
 	 * long name like Portable Network Graphics to its acronym (PNG).
 	 */
 	public String acronym(String phrase) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		String[] words = phrase.split("[\\s-_]");
+		String acronym = "";
+		for (String str : words) {
+			acronym += str.toUpperCase().charAt(0);
+		}
+		return acronym;
 	}
 
 	/**
@@ -380,8 +413,33 @@ public class EvaluationService {
 	 * 3 + 2*1 + 2*3 + 2 + 1 = 3 + 2 + 6 + 3 = 5 + 9 = 14
 	 */
 	public int getScrabbleScore(String string) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+		String onePoint = "AaEeIiOoUuLlNnRrSsTt";
+		String twoPoints = "DdGg";
+		String threePoints = "BbCcMmPp";
+		String fourPoints = "FfHhVvWwYy";
+		String fivePoints = "Kk";
+		String eightPoints = "JjXx";
+		String tenPoints = "QqZz";
+		String[] characters = string.split("");
+		int sum = 0;
+		for (String character : characters) {
+			if (onePoint.contains(character)) {
+				sum += 1;
+			} else if (twoPoints.contains(character)){
+				sum += 2;
+			} else if (threePoints.contains(character)){
+				sum += 3;
+			} else if (fourPoints.contains(character)){
+				sum += 4;
+			} else if (fivePoints.contains(character)){
+				sum += 5;
+			} else if (eightPoints.contains(character)){
+				sum += 8;
+			} else if (tenPoints.contains(character)){
+				sum += 10;
+			}
+		}
+		return sum;
 	}
 
 	/**
@@ -418,7 +476,27 @@ public class EvaluationService {
 	 * NANP-countries, only 1 is considered a valid country code.
 	 */
 	public String cleanPhoneNumber(String string) {
-		return null;
+ 	   // convert string to a linkedlist for ease of minipulation
+ 	   LinkedList<String> digits = new LinkedList<String>(Arrays.asList(string.split("")));
+ 	   Pattern regexX = Pattern.compile("[0-9]");
+ 	   String output = "";
+ 	   for (int i=digits.size()-1; i >= 0 ; i--) {
+ 		   Matcher matcherX = regexX.matcher(digits.get(i));
+ 		   if (!matcherX.matches()) {
+ 			   digits.remove(i);
+ 		   }
+ 	   }
+ 	   if (digits.get(0) == "1") {
+ 		   digits.remove(0);
+ 	   }
+ 	   if (digits.get(3) == "1" || digits.size() != 10) {
+ 		  throw new IllegalArgumentException();
+ 	   }
+ 	   for (String digit : digits) {
+ 		   output += digit;
+ 	   }
+
+ 	   return output;
 	}
 
 	/**
@@ -430,8 +508,16 @@ public class EvaluationService {
 	 * free: 1
 	 */
 	public Map<String, Integer> wordCount(String string) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		String[] words = string.split("\\W+");
+		Map<String, Integer> count = new HashMap<String, Integer>();
+		for (String word : words) {
+			if (count.containsKey(word)) {
+				count.replace(word, count.get(word) + 1);
+			} else {
+				count.put(word, 1);
+			}
+		}
+		return count;
 	}
 
 	/**
@@ -442,14 +528,22 @@ public class EvaluationService {
 	 * 
 	 * For example:
 	 * 
-	 * 9 is an Armstrong number, because 9 = 9^1 = 9 10 is not an Armstrong number,
-	 * because 10 != 1^2 + 0^2 = 2 153 is an Armstrong number, because: 153 = 1^3 +
-	 * 5^3 + 3^3 = 1 + 125 + 27 = 153 154 is not an Armstrong number, because: 154
-	 * != 1^3 + 5^3 + 4^3 = 1 + 125 + 64 = 190 Write some code to determine whether
+	 * 9 is an Armstrong number, because 9 = 9^1 = 9. 10 is not an Armstrong number,
+	 * because 10 != 1^2 + 0^2 = 2. 153 is an Armstrong number, because: 153 = 1^3 +
+	 * 5^3 + 3^3 = 1 + 125 + 27 = 153. 154 is not an Armstrong number, because: 154
+	 * != 1^3 + 5^3 + 4^3 = 1 + 125 + 64 = 190. Write some code to determine whether
 	 * a number is an Armstrong number.
 	 */
 	public boolean isArmstrongNumber(int input) {
-		return false;
+		// convert input to a list
+		List<String> digits = Arrays.asList(Integer.toString(input).split(""));
+		// stream() through the array
+		int sum = 0;
+		for (String digit : digits) {
+			sum += Math.pow(Integer.parseInt(digit), digits.size());
+		}
+		// check if the sum is equal to input
+		return (sum == input) ? true : false;
 	}
 
 	/**
@@ -461,8 +555,34 @@ public class EvaluationService {
 	 * Note that 1 is not a prime number.
 	 */
 	public List<Long> calculatePrimeFactorsOf(long l) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		List<Long> primeFactors = new ArrayList<>();
+		if (isPrime(l)) {
+			primeFactors.add(l);
+			return primeFactors;
+		}
+		long m = l;
+		for (long i = 2L; i <= Math.sqrt(l); i++) {
+			if (isPrime(i) && l % i == 0) {
+				primeFactors.add(i);
+				m = m/i;
+				while (m % i == 0) {
+					primeFactors.add(i);
+					m = m / i;
+				}
+			}
+				
+		}
+		return primeFactors;
+	}
+	
+	public boolean isPrime(long num) {
+		if (num == 1) {
+			return false;
+		}
+		for (long i=2L; i <= Math.sqrt(num); i++) {
+			if (num % i == 0) return false;
+		}
+		return true;
 	}
 
 	/**
@@ -477,8 +597,17 @@ public class EvaluationService {
 	 * numbers, pretend they don't exist and implement them yourself.
 	 */
 	public int calculateNthPrime(int k) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+		if (k <= 0) {
+			throw new IllegalArgumentException();
+		}
+		int counter = 0;
+		for (int i = 2; true; i++) {
+			if (isPrime(i)) {
+				counter ++;
+				if (counter == k)
+					return i;
+			}
+		}
 	}
 
 	/**
@@ -494,8 +623,16 @@ public class EvaluationService {
 	 * insensitive. Input will not contain non-ASCII symbols.
 	 */
 	public boolean isPangram(String string) {
-		// TODO Write an implementation for this method declaration
-		return false;
+		// convert string into an ArrayList of type Character
+		ArrayList<Character> characterList = new ArrayList<>();
+        char[] characterArray = string.toUpperCase().toCharArray();
+        for(char c : characterArray) characterList.add(c);
+        // check each ASCII value to see if characterList contains the letter
+        for (char alpha = 'A'; alpha < 91; alpha++) {
+        	if (!characterList.contains(alpha)) return false;
+        }
+		
+		return true;
 	}
 
 	/**
@@ -509,8 +646,19 @@ public class EvaluationService {
 	 * 
 	 * The sum of these multiples is 78.
 	 */
-	public int getSumOfMultiples(int i, int[] set) {
-		return 0;
+	public int getSumOfMultiples(int k, int[] set) {
+		Set<Integer> multiples = new HashSet<>();
+		int sum = 0;
+		for (int i = 1; i < k; i++) {
+			for (int j = 0; j < set.length; j++)
+			if (i % set[j] == 0) {
+				multiples.add(i);
+			}
+		}
+		for (int multiple : multiples) {
+			sum += multiple;
+		}
+		return sum;
 	}
 	
 	/**
@@ -524,7 +672,9 @@ public class EvaluationService {
 	 */
 	
 	public int[] threeLuckyNumbers() {
-		return null;
+		Random rando = new Random();
+		int[] numbers = {rando.nextInt(100) + 1, rando.nextInt(100) + 1, rando.nextInt(100) + 1};
+		return numbers;
 	}
 	
 	/*
@@ -538,6 +688,7 @@ public class EvaluationService {
 	 */
 	
 	public int guessingGame(int x, int y) {
-		return 0;
+		Random rando = new Random();
+		return rando.nextInt(y) + x;
 	}
 }

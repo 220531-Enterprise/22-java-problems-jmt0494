@@ -96,6 +96,7 @@ public class EvaluationServiceTest {
 	
 	/*******************************************************************
 	 * Question 4
+	 *******************************************************************/
 	@Test
 	public void testDecimalComparator1() {
 		assertEquals(true, evaluationService.areEqualByThreeDecimalPlaces(-3.1756, -3.175));
@@ -110,7 +111,6 @@ public class EvaluationServiceTest {
 	public void testDecimalComparator3() {
 		assertEquals(true, evaluationService.areEqualByThreeDecimalPlaces(3.0, 3.0));
 	}
-	 *******************************************************************/
 	
 	/*******************************************************************
 	 * Question 5
@@ -181,6 +181,7 @@ public class EvaluationServiceTest {
 	
 	/*******************************************************************
 	 * Question 9
+	 ******************************************************************/
 	@Test
 	public void testFirstAndLastDigit1() {
 		assertEquals(4, evaluationService.sumFirstAndLastDigit(252));
@@ -200,10 +201,10 @@ public class EvaluationServiceTest {
 	public void testFirstAndLastDigitInvalid() {
 		assertEquals(-1, evaluationService.sumFirstAndLastDigit(-10));
 	}
-	 ******************************************************************/
 	
 	/*******************************************************************
 	 * Question 10
+	 ******************************************************************/
 	@Test
 	public void testAnEmptyString() {
 		assertEquals("", evaluationService.reverse(""));
@@ -228,10 +229,10 @@ public class EvaluationServiceTest {
 	public void testAPalindrome() {
 		assertEquals("racecar", evaluationService.reverse("racecar"));
 	}
-	 ******************************************************************/
 
 	/*******************************************************************
 	 * Question 11
+	 ******************************************************************/
 	@Test
 	public void basic() {
 		final String phrase = "Portable Network Graphics";
@@ -259,7 +260,6 @@ public class EvaluationServiceTest {
 		final String expected = "CMOS";
 		assertEquals(expected, evaluationService.acronym(phrase));
 	}
-	 ******************************************************************/
 
 	/*******************************************************************
 	 * Question 12
@@ -303,6 +303,7 @@ public class EvaluationServiceTest {
 
 	/*******************************************************************
 	 * Question 13
+	 ******************************************************************/
 	@Test
 	public void testAValuableLetter() {
 		assertEquals(4, evaluationService.getScrabbleScore("f"));
@@ -327,10 +328,10 @@ public class EvaluationServiceTest {
 	public void testALongMixCaseWord() {
 		assertEquals(41, evaluationService.getScrabbleScore("OxyphenButazone"));
 	}
-	 ******************************************************************/
 
 	/*******************************************************************
 	 * Question 14
+	 ******************************************************************/
 	@Test
 	public void cleansTheNumber() {
 		final String expectedNumber = "2234567890";
@@ -365,10 +366,10 @@ public class EvaluationServiceTest {
 		expectedException.expect(IllegalArgumentException.class);
 		evaluationService.cleanPhoneNumber("123-@:!-7890");
 	}
-	 ******************************************************************/
 
 	/*******************************************************************
 	 * Question 15
+	 ******************************************************************/
 	@Test
 	public void countOneWord() {
 		Map<String, Integer> expectedWordCount = new HashMap<>();
@@ -423,10 +424,10 @@ public class EvaluationServiceTest {
 		Map<String, Integer> actualWordCount = evaluationService.wordCount("one,\ntwo,\nthree");
 		assertEquals(expectedWordCount, actualWordCount);
 	}
-	 ******************************************************************/
 	
 	/*******************************************************************
 	 * Question 16
+	 ******************************************************************/
 	@Test
 	public void singleDigitsAreArmstrongNumbers() {
 		int input = 5;
@@ -461,10 +462,10 @@ public class EvaluationServiceTest {
 
 		assertTrue(evaluationService.isArmstrongNumber(input));
 	}
-	 ******************************************************************/
 
 	/*******************************************************************
 	 * Question 17
+	 ******************************************************************/
 
 	@Test
 	public void testPrimeNumber() {
@@ -490,10 +491,10 @@ public class EvaluationServiceTest {
 	public void testProductOfPrimes() {
 		assertEquals(Arrays.asList(5L, 17L, 23L, 461L), evaluationService.calculatePrimeFactorsOf(901255L));
 	}
-	 ******************************************************************/
 
 	/*******************************************************************
 	 * Question 18
+	 ******************************************************************/
 	@Test
 	public void testFirstPrime() {
 		assertThat(evaluationService.calculateNthPrime(1), is(2));
@@ -519,10 +520,10 @@ public class EvaluationServiceTest {
 		expectedException.expect(IllegalArgumentException.class);
 		evaluationService.calculateNthPrime(0);
 	}
-	 ******************************************************************/
 
 	/*******************************************************************
 	 * Question 19
+	 ******************************************************************/
 	@Test
 	public void emptySentenceIsNotPangram() {
 		assertFalse(evaluationService.isPangram(""));
@@ -547,11 +548,11 @@ public class EvaluationServiceTest {
 	public void phraseMissingAnotherCharacterIsNotPangram() {
 		assertFalse(evaluationService.isPangram("five boxing wizards jump quickly at it"));
 	}
-	 ******************************************************************/
 
 
 	/*******************************************************************
 	 * Question 20
+	 ******************************************************************/
 	@Test
 	public void testSumOfMultiplesOf4and6UpToFifteen() {
 
@@ -591,11 +592,11 @@ public class EvaluationServiceTest {
 		int output = evaluationService.getSumOfMultiples(100, set);
 		assertEquals(4950, output);
 	}
-	 ******************************************************************/
 	
 	
 	/*******************************************************************
 	 * Question 21
+	 ******************************************************************/
 	@Test
 	public void testThreeLuckyNumbers() {
 		int[] arr = evaluationService.threeLuckyNumbers();
@@ -609,10 +610,10 @@ public class EvaluationServiceTest {
 		}
 		assertEquals(3, count);	
 	}
-	 ******************************************************************/
 	
 	/*******************************************************************
 	 * Question 22
+	 ******************************************************************/
 	@Test
 	public void testGuessingGame() {
 		int n = evaluationService.guessingGame(1, 10);
@@ -622,7 +623,6 @@ public class EvaluationServiceTest {
 		}
 		assertEquals(true, result);
 	}
-	 ******************************************************************/
 	
 }
 
